@@ -54,6 +54,10 @@ func getJsonFileContent(path string, jsonContent *[]Item) error {
 }
 
 func getItemsList(args Arguments, writer io.Writer) error {
+	err := checkFileExist(args["fileName"])
+	if err != nil {
+		return err
+	}
 	data, err := ioutil.ReadFile(args["fileName"])
 	if err != nil {
 		return err
