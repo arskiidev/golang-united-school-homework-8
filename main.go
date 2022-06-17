@@ -83,6 +83,13 @@ func addItem(args Arguments, writer io.Writer) error {
 	if err != nil {
 		return err
 	}
+	for _, i := range jsonContent {
+		if i.Id == itemContent.Id {
+			msg := fmt.Sprintf("Item with id %v already exists", itemContent.Id)
+			writer.Write([]byte(msg))
+			return nil
+		}
+	}
 	jsonContent = append(jsonContent, itemContent)
 	data, err := json.Marshal(jsonContent)
 	if err != nil {
